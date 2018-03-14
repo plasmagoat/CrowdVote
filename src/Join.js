@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Form, Grid } from 'semantic-ui-react';
+import { onJoin } from './DataStore';
 
 class Join extends Component {
   constructor(props){
@@ -9,16 +10,10 @@ class Join extends Component {
       joincode: ''
     }
 
-    this.handleAddOption = this.handleAddOption.bind(this);
     this.updateJoinCode = this.updateJoinCode.bind(this);
-  }
+    this.handleBack = this.handleBack.bind(this);
+    this.handleJoin = this.handleJoin.bind(this);
 
-  handleAddOption(e){
-    console.log("terst")
-    this.setState((state) => ({
-      options: state.options.concat([state.newOption]),
-      newOption: ''
-    }));
   }
 
   updateJoinCode(e){
@@ -27,7 +22,27 @@ class Join extends Component {
     })
   }
 
+  handleBack(e){
+    this.props.view('main');
+    
+  }
+
+  handleJoin(e){
+    this.setState({
+      loading: true
+    });
+    onJoin(this.state.joincode, (err, joincode) => {
+      this.props.view('vote');
+    });
+
+    
+  }
+
   render() {
+    let join = <Button onClick={this.handleJoin} color='purple' fluid size='large'>Join!</Button>
+    if(this.state.loading === true){
+      join = <Button loading color='purple' fluid size='large'>Join!</Button>
+    }
     return (
         <Form size='large'>
             <Form.Input
@@ -41,10 +56,10 @@ class Join extends Component {
             />
             <Grid columns='equal'>
                 <Grid.Column>
-                    <Button onClick={this.props.history.goBack} color='teal' fluid size='large'>Go Back</Button>
+                    <Button onClick={this.handleBack} color='teal' fluid size='large'>Go Back</Button>
                 </Grid.Column>
                 <Grid.Column>
-                    <Button color='purple' fluid size='large'>Join!</Button>
+                    {join}
                 </Grid.Column>
             </Grid>
         </Form>

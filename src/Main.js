@@ -1,16 +1,29 @@
 import React, { Component } from 'react';
-import { Button, Icon } from 'semantic-ui-react';
+import { Button, Icon, Header } from 'semantic-ui-react';
 
 class Main extends Component {
+  constructor(props){
+    super(props);
+    this.handleJoinClick = this.handleJoinClick.bind(this);
+    this.handleCreateClick = this.handleCreateClick.bind(this);
+
+  }
+
+  handleJoinClick(e){
+    this.props.view('join');
+  }
+
+  handleCreateClick(e){
+    this.props.view('create');
+  }
+  
   render() {
     return (
-      <div className='login-form'>
-        <Button.Group size='massive'>
-          <Button href='/create' color='teal'><Icon name='idea'></Icon>Create</Button>
-          <Button.Or />
-          <Button href='/join' color='purple'><Icon name='users'></Icon>Join</Button>
-        </Button.Group>
-      </div>
+      <Button.Group size='massive'>
+        <Button onClick={this.handleCreateClick} color='teal'><Icon name='idea'></Icon>Create</Button>
+        <Button.Or />
+        <Button onClick={this.handleJoinClick} color='purple'><Icon name='users'></Icon>Join</Button>
+      </Button.Group>
     );
   }
 }

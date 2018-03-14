@@ -7,3 +7,10 @@
   margin: 0 0 1em;
 }
 
+.chooseOption {
+  text-align: left;
+}
+
+.createdCard {
+  box-shadow: none !important;
+}

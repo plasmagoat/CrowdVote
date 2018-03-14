@@ -10,7 +10,7 @@ class OptionList extends Component {
               fluid
               key={i}
               value={option}
-              onChange={this.props.update}
+              onChange={(e) => this.props.update(e, i)}
               action={{ onClick: () => this.props.remove(i), icon: 'minus', color: 'purple' }}
             />
           })}
