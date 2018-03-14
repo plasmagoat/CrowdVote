@@ -1,31 +1,33 @@
 import React, { Component } from 'react';
-import { Button, Form, Grid, Header, Image, Message, Segment, Icon } from 'semantic-ui-react';
-import logo from './logo.svg';
+import { Switch, Route } from 'react-router'
+import { Grid, Header, Segment } from 'semantic-ui-react';
 import './App.css';
 import Create from './Create';
 import Main from './Main';
+import Join from './Join';
+import DataStore from './DataStore'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-
-
-        <div className='login-form'>
-          <Grid
-            textAlign='center'
-            style={{ height: '100%' }}
-            verticalAlign='middle'
-          >
-            <Grid.Column style={{ maxWidth: 450 }}>
-              <Header as='h2' color='teal' textAlign='center'>
-                Crowd Vote
+        <Grid
+          textAlign='center'
+          verticalAlign='middle'
+        >
+          <Grid.Column style={{ maxWidth: 450, marginTop: '10em' }}>
+            <Header as='h1' color='teal' textAlign='center'>
+              Crowd Vote
               </Header>
-              <Main></Main>
-              <Create></Create>
-            </Grid.Column>
-          </Grid>
-        </div>
+            <Segment stacked>
+              <Switch>
+                <Route exact path='/' component={Main} />
+                <Route path='/join' render={(props) => <Join {...props}/>} />
+                <Route path='/create' render={(props) => <Create create={DataStore.onCreate} {...props}/>} />
+              </Switch>
+            </Segment>
+          </Grid.Column>
+        </Grid>
       </div>
     );
   }
