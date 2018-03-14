@@ -2,7 +2,7 @@
   "name": "crowdvote",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://elduderino420.github.io/crowdvote",
+  "homepage": "http://elduderino420.github.io/CrowdVote",
   "dependencies": {
     "chart.js": "^2.7.2",
     "react": "^16.2.0",
