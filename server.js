@@ -1,7 +1,15 @@
-//const express = require('express');
-const io = require('socket.io')();
+const express = require('express');
+const app = app = express();
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
 
-const port = 8000;
+const port = process.env.PORT || 8000;
+
+app.use(express.static(__dirname + '/public'));
+
+server.listen(port, function () {
+  console.log('Server listening at port %d', port);
+});
 
 let rooms = [];
 let votes = [];
@@ -15,13 +23,6 @@ makeid = (len) => {
 
     return text;
 }
-// let app = express();
-
-// app.use(express.static('./public'));
-
-// app.listen(8000);
-// console.log("Server running on port 3000");
-
 
 io.on('connection', (client) => {
     // here you can start emitting events to the client 
@@ -55,11 +56,8 @@ io.on('connection', (client) => {
 
         votes[rooms.indexOf(roomnum)].votes[index]++;
         let current = votes[rooms.indexOf(roomnum)];
-        
+
         client.emit('votes', current);
         client.to(roomnum).emit('update', current);
     })
 });
-
-io.listen(port);
-console.log("Server running on port ", port);
