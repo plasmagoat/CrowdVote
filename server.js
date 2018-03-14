@@ -11,6 +11,9 @@ server.listen(port, function () {
   console.log('Server listening at port %d', port);
 });
 
+app.get('/', (req, res) => res.send('Hello World!'));
+
+
 let rooms = [];
 let votes = [];
 
