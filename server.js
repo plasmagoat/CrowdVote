@@ -1,17 +1,17 @@
-const express = require('express');
-
-const app = express();
+const app = require('express')();
+const server = require('http').Server(app);
+const io = require('socket.io')(server);
 
 const port = process.env.PORT || 8000;
 
-app.use(express.static(__dirname + '/public'));
+//app.use(express.static(__dirname + '/public'));
 
 
-app.listen(port, function () {
+server.listen(port, function () {
   console.log('Server listening at port %d', port);
 });
 
-const io = require('socket.io')(app);
+
 
 app.get('/', (req, res) => res.send('Hello World!'));
 
