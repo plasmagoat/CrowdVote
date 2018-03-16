@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Icon, Header } from 'semantic-ui-react';
+import { Responsive, Button, Icon } from 'semantic-ui-react';
 
 class Main extends Component {
   constructor(props){
@@ -19,11 +19,18 @@ class Main extends Component {
   
   render() {
     return (
-      <Button.Group size='massive'>
-        <Button onClick={this.handleCreateClick} color='teal'><Icon name='idea'></Icon>Create</Button>
-        <Button.Or />
-        <Button onClick={this.handleJoinClick} color='purple'><Icon name='users'></Icon>Join</Button>
-      </Button.Group>
+      <div>
+        <Responsive as={Button.Group} witdths='2' size='massive' minWidth={451}>
+        <Button onClick={this.handleCreateClick} color='teal' icon labelPosition='left'><Icon name='idea'></Icon>Create</Button>
+          <Button.Or />
+          <Button onClick={this.handleJoinClick} color='purple' icon labelPosition='right'><Icon name='users'></Icon>Join</Button>
+        </Responsive>
+        <Responsive as={Button.Group} size='large' maxWidth={450}>
+        <Button onClick={this.handleCreateClick} color='teal' icon labelPosition='left'><Icon name='idea'></Icon>Create</Button>
+          <Button.Or />
+          <Button onClick={this.handleJoinClick} color='purple' icon labelPosition='right'><Icon name='users'></Icon>Join</Button>
+        </Responsive>
+      </div>
     );
   }
 }

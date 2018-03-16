@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Icon, Form, Grid, Checkbox, Header } from 'semantic-ui-react';
+import { Button, Form, Grid, Header, Label, Icon } from 'semantic-ui-react';
 import { vote, onVote } from './DataStore';
 
 class Vote extends Component {
@@ -34,34 +34,33 @@ class Vote extends Component {
   
   render() {
     return (
-        <Form className='chooseOption' size='large'>
-        {this.state.value}
-        <Header as='h2' color='teal' textAlign='center'>
-            {this.state.vote.joincode}
-        </Header>
-        <Header as='h4' color='purple'>
-            {this.state.vote.question}
-        </Header>
-        
-        {this.state.vote.options.map((option, i) => {
-            let opt = <Button key={i} basic fluid color='teal' value={i} content={option} onClick={this.handleSelect} />
-            if(this.state.selected === i.toString()){
-                opt = <Button key={i} fluid color='teal' value={i} content={option} onClick={this.handleSelect} />
-            }
-            return <Form.Field key={i}>
-                    {opt}
-                </Form.Field>
-          })}
+        <div>
+            
+            <Form className='chooseOption' size='large'>
+                <Label className='room' color='purple' ribbon='right'>{this.state.vote.joincode}</Label>
 
-        <Grid columns='equal'>
-            <Grid.Column>
-                <Button onClick={this.handleBack} color='teal' fluid size='large'>Cancel</Button>
-            </Grid.Column>
-            <Grid.Column>
-            <Button onClick={this.handleSubmit} color='purple' fluid size='large'>Submit</Button>
-            </Grid.Column>
-        </Grid>
-    </Form>
+                <Header as='h2' color='teal' textAlign='center'>
+                    {this.state.vote.question}
+                </Header>
+
+                {this.state.vote.options.map((option, i) => {
+                    return <Form.Field key={i}>
+                        {this.state.selected === i.toString()
+                            ? <Button key={i} fluid color='teal' value={i} content={option} onClick={this.handleSelect} />
+                            : <Button key={i} basic fluid color='teal' value={i} content={option} onClick={this.handleSelect} />}
+                    </Form.Field>
+                })}
+
+                <Grid columns='equal'>
+                    <Grid.Column>
+                    <Button onClick={this.handleBack} color='teal' fluid size='large' icon labelPosition='left'><Icon name='home'></Icon>Back</Button>
+                    </Grid.Column>
+                    <Grid.Column>
+                        <Button onClick={this.handleSubmit} color='purple' fluid size='large'icon labelPosition='right'><Icon name='share'></Icon>Submit</Button>
+                    </Grid.Column>
+                </Grid>
+            </Form>
+        </div>
     );
   }
 }

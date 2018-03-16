@@ -14,3 +14,8 @@
 .createdCard {
   box-shadow: none !important;
 }
+
+.room {
+  display: block !important;
+  width: 30%;
+}

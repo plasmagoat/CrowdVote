@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Button, Form, Grid } from 'semantic-ui-react';
+import { Button, Form, Grid, Transition, Icon } from 'semantic-ui-react';
 import OptionList from './OptionList';
-import Main from './Main';
 import { onCreate } from './DataStore';
 
 
@@ -13,7 +12,8 @@ class Create extends Component {
       question: '',
       options: [],
       votes:[],
-      newOption: ''
+      newOption: '',
+      addani: true
     }
 
     this.handleAddOption = this.handleAddOption.bind(this);
@@ -29,7 +29,8 @@ class Create extends Component {
     if(this.state.newOption !== ''){
       this.setState((state) => ({
         options: state.options.concat([state.newOption]),
-        newOption: ''
+        newOption: '',
+        addani: !this.state.addani
       }));
     }
     
@@ -67,11 +68,13 @@ class Create extends Component {
   }
 
   handleCreate(e){
-    if(this.state.question !== '' && this.state.options.length > 0){
+    if(this.state.question !== '' && (this.state.options.length > 0 || this.state.newOption !== '')){
       this.setState({
         loading: true
       });
+      
       let { options, question } = this.state;
+      if(this.state.newOption !== '') options.push(this.state.newOption);
       onCreate({options, question}, (err, joincode) => {
         this.props.view('created');
       });
@@ -85,10 +88,6 @@ class Create extends Component {
   }
 
   render() {
-    let create = <Form.Button onClick={this.handleCreate} color='teal' fluid size='large'>Create!</Form.Button>
-    if(this.state.loading === true){
-      create = <Form.Button loading color='teal' fluid size='large'>Create!</Form.Button>
-    }
     return (
       <Form size='large'>
         <Form.Input
@@ -99,24 +98,32 @@ class Create extends Component {
           onChange={this.updateQuestion}
         />
         <OptionList list={this.state.options} remove={this.handleRemoveOption} update={this.updateOption}></OptionList>
-        <Form.Input
-          fluid
-          icon='options'
-          iconPosition='left'
-          value={this.state.newOption}
-          onChange={this.updateNewOption}
-          action={{ onClick: this.handleAddOption, icon: 'plus', color: 'teal' }}
-          placeholder='Option'
-        />
+        <Transition
+          duration={200}
+          animation={'pulse'}
+          visible={this.state.addani}
+        >
+          <Form.Input
+            fluid
+            icon='options'
+            iconPosition='left'
+            value={this.state.newOption}
+            onChange={this.updateNewOption}
+            action={{ basic: true, onClick: this.handleAddOption, icon: 'plus', color: 'teal' }}
+            placeholder='Option'
+          />
+        </Transition>
 
         
 
         <Grid columns='equal'>
           <Grid.Column>
-            <Button onClick={this.handleBack} color='purple' fluid size='large'>Go Back</Button>
+            <Button onClick={this.handleBack} color='purple' fluid size='large' icon labelPosition='left'><Icon name='home'></Icon>Back</Button>
           </Grid.Column>
           <Grid.Column>
-            {create}
+            {this.state.loading === true 
+              ? <Form.Button loading color='teal' fluid size='large'>Create</Form.Button>
+              : <Form.Button onClick={this.handleCreate} color='teal' fluid size='large' icon labelPosition='right'><Icon name='arrow right'></Icon>Create</Form.Button>}
           </Grid.Column>
         </Grid>
       </Form>

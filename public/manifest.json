@@ -1,15 +1,19 @@
 {
   "short_name": "Crowd Vote",
-  "name": "Crowd Vote: Polling App",
-  "icons": [
+  "name": "Progressive Voting Web App",
+  "icons": [{
+      "src": "/CrowdVote/img/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
     {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
+      "src": "/CrowdVote/img/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
     }
   ],
-  "start_url": "./index.html",
+  "start_url": "/CrowdVote/index.html",
   "display": "standalone",
   "theme_color": "#008080",
-  "background_color": "#FFFAF0"
+  "background_color": "#008080"
 }

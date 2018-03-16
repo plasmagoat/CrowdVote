@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Responsive, { Button, Icon, Form, Grid, Checkbox, Header } from 'semantic-ui-react';
+import { Button, Grid, Header, Label, Form } from 'semantic-ui-react';
 import { vote, creator, readyForUpdates } from './DataStore';
 import { Bar } from 'react-chartjs-2';
 
@@ -22,14 +22,13 @@ class Results extends Component {
   
   
   render() {
-    let close;
-    console.log(vote.joincode);
-    console.log(creator);
-    if(this.state.vote.joincode === creator){
-        close = <Button onClick={this.handleJoin} color='purple' size='large'>Close Vote</Button>
-    }
     return (
-        <div>
+        <Form size='large'>
+            <Label className='room' color='purple' ribbon='right'>{this.state.vote.joincode}</Label>
+            <Header as='h2' color='teal' textAlign='center'>
+                {this.state.vote.joincode}
+            </Header>
+            
             <Bar data={{
                 labels: this.state.vote.options,
                 datasets: [{
@@ -45,8 +44,11 @@ class Results extends Component {
                 maintainAspectRatio: true,
                 responsive: true
             }} />
-            {close}
-        </div>
+            {this.state.vote.joincode === creator
+                ? <Grid.Column><Button onClick={this.handleJoin} color='purple' size='large'>Close Vote</Button></Grid.Column>
+                : <Button onClick={this.handleBack} color='teal' size='large'>Back</Button>}
+
+        </Form>
     );
   }
 }

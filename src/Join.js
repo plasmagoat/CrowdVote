@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, Grid } from 'semantic-ui-react';
+import { Button, Form, Grid, Icon } from 'semantic-ui-react';
 import { onJoin } from './DataStore';
 
 class Join extends Component {
@@ -9,6 +9,7 @@ class Join extends Component {
     this.state = {
       joincode: ''
     }
+
 
     this.updateJoinCode = this.updateJoinCode.bind(this);
     this.handleBack = this.handleBack.bind(this);
@@ -34,19 +35,14 @@ class Join extends Component {
     onJoin(this.state.joincode, (err, joincode) => {
       this.props.view('vote');
     });
-
-    
   }
 
   render() {
-    let join = <Button onClick={this.handleJoin} color='purple' fluid size='large'>Join!</Button>
-    if(this.state.loading === true){
-      join = <Button loading color='purple' fluid size='large'>Join!</Button>
-    }
     return (
         <Form size='large'>
             <Form.Input
                 fluid
+                focus={true}
                 icon='question'
                 iconPosition='left'
                 placeholder='Join Code'
@@ -56,10 +52,12 @@ class Join extends Component {
             />
             <Grid columns='equal'>
                 <Grid.Column>
-                    <Button onClick={this.handleBack} color='teal' fluid size='large'>Go Back</Button>
+                    <Button onClick={this.handleBack} color='teal' fluid size='large' icon labelPosition='left'><Icon name='home'></Icon>Back</Button>
                 </Grid.Column>
                 <Grid.Column>
-                    {join}
+                    {this.state.loading === true
+                      ? <Button loading color='purple' fluid size='large' icon labelPosition='right'><Icon name='arrow right'></Icon>Join</Button>
+                      : <Button onClick={this.handleJoin} color='purple' fluid size='large' icon labelPosition='right'><Icon name='arrow right'></Icon>Join</Button>}
                 </Grid.Column>
             </Grid>
         </Form>
