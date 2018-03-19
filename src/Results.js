@@ -26,7 +26,7 @@ class Results extends Component {
         <Form size='large'>
             <Label className='room' color='purple' ribbon='right'>{this.state.vote.joincode}</Label>
             <Header as='h2' color='teal' textAlign='center'>
-                {this.state.vote.joincode}
+                {this.state.vote.question}
             </Header>
             
             <Bar data={{

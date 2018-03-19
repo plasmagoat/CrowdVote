@@ -7,6 +7,7 @@ import { onCreate } from './DataStore';
 class Create extends Component {
   constructor(props){
     super(props);
+    
 
     this.state = {
       question: '',
@@ -24,6 +25,7 @@ class Create extends Component {
     this.updateQuestion = this.updateQuestion.bind(this);
     this.updateOption = this.updateOption.bind(this);
   }
+  
 
   handleAddOption(e){
     if(this.state.newOption !== ''){
@@ -32,9 +34,12 @@ class Create extends Component {
         newOption: '',
         addani: !this.state.addani
       }));
+      
     }
     
   }
+
+  
 
   handleRemoveOption(index){
     let newlist = this.state.options;

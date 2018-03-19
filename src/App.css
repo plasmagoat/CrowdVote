@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  height: 100%;
 }
 
 
@@ -18,4 +19,16 @@
 .room {
   display: block !important;
   width: 30%;
+}
+
+.segment {
+  height: auto;
+  max-height: 60%;
+  overflow: auto;
+  margin-bottom: 20px;
+}
+
+h1 {
+  color: white !important;
+  font-family: 'Knewave', cursive !important;
 }

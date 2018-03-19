@@ -1,6 +1,7 @@
 import openSocket from 'socket.io-client'
 
-let socket = openSocket('https://crowdvoteserver.herokuapp.com');
+//let socket = openSocket('https://crowdvoteserver.herokuapp.com');
+let socket = openSocket('https://crowdvote-dexjkyrihr.now.sh/');
 let vote = {
     question: '',
     options: [],

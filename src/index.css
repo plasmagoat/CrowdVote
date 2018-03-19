@@ -5,4 +5,8 @@ html, body {
   min-height: 100%;
   background-color: teal;
   width: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
 }
